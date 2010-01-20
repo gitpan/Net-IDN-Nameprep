@@ -1,50 +1,48 @@
 package Net::IDN::Nameprep;
 
 use strict;
-require v5.6.0;
-our $VERSION = '0.02';
+use utf8;
+use warnings;
+
+our $VERSION = "1.000";
+$VERSION = eval $VERSION;
+
+require Exporter;
 our @ISA    = qw(Exporter);
 our @EXPORT = qw(nameprep);
 
-use Net::IDN::Nameprep::Mapping;
-use Net::IDN::Nameprep::Prohibited;
+use Unicode::Stringprep;
 
-use Unicode::Normalize;
+use Unicode::Stringprep::Mapping;
+use Unicode::Stringprep::Prohibited;
 
-sub mapping {
-    my $input = shift;
-    my $mapped;
-    for my $i (0..length($input)-1) {
-	my $char = substr($input, $i, 1);
-	$mapped .= join '', map chr, Net::IDN::Nameprep::Mapping->mapping(ord($char));
-    }
-    return $mapped;
-}
-
-sub check_prohibited {
-    my $input = shift;
-    for my $i (0..length($input)-1) {
-	my $char = substr($input, $i, 1);
-	if (Net::IDN::Nameprep::Prohibited->prohibited(ord($char))) {
-	    require Carp;
-	    Carp::croak("String contains prohibited character: U+". sprintf '%04x', ord $char);
-	}
-    }
-}
-
-sub nameprep {
-    my $input = shift;
-    my $output = NFKC mapping $input;
-    check_prohibited $output;
-    return $output;
-}
+*nameprep = Unicode::Stringprep->new(
+  3.2,
+  [ 
+    @Unicode::Stringprep::Mapping::B1, 
+    @Unicode::Stringprep::Mapping::B2 
+  ],
+  'KC',
+  [
+    @Unicode::Stringprep::Prohibited::C12,
+    @Unicode::Stringprep::Prohibited::C22,
+    @Unicode::Stringprep::Prohibited::C3,
+    @Unicode::Stringprep::Prohibited::C4,
+    @Unicode::Stringprep::Prohibited::C5,
+    @Unicode::Stringprep::Prohibited::C6,
+    @Unicode::Stringprep::Prohibited::C7,
+    @Unicode::Stringprep::Prohibited::C8,
+    @Unicode::Stringprep::Prohibited::C9
+  ],
+  1,
+);
 
 1;
 __END__
 
 =head1 NAME
 
-Net::IDN::Nameprep - IDN nameprep tools
+Net::IDN::Nameprep - A Stringprep Profile for Internationalized Domain Names (S<RFC 3491>)
 
 =head1 SYNOPSIS
 
@@ -53,40 +51,46 @@ Net::IDN::Nameprep - IDN nameprep tools
 
 =head1 DESCRIPTION
 
-B<THIS IS ALPHA SOFTWARE. NEEDS MORE TESTING!>
-
-Net::IDN::Nameprep implements IDN nameprep specification. This module
-exports only one function called C<nameprep>.
-
-There comes C<NO WARRANTY> with this module.
+This module implements the I<nameprep> specification, which describes how to
+prepare internationalized domain name (IDN) labels in order to increase the
+likelihood that name input and name comparison work in ways that make sense for
+typical users throughout the world.  Nameprep is a profile of the stringprep
+protocol and is used as part of a suite of on-the-wire protocols for
+internationalizing the Domain Name System (DNS).
 
 =head1 FUNCTIONS
 
-=over 4
+This module implements a single function, C<nameprep>, which is exported by default.
 
-=item nameprep
+=over
 
-  $prepared = nameprep $utf8;
+=item B<nameprep($input)>
 
-accepts UTF8 encoded string, and returns nameprep-ed UTF8 encoded
-string. It might throw an exception in case of error ("String %s
-contains prohibited character: %s").
+Processes C<$input> according to the I<nameprep> specification and
+returns the result.
+
+If C<$input> contains characters not allowed for I<nameprep>, it
+throws an exception (so use C<eval> if necessary).
+
+This function currently supports preparation for I<query> strings only.
 
 =back
 
-=head1 BUGS
-
-There may be plenty of Bugs. Please lemme know if you find any.
-
 =head1 AUTHOR
 
-Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
+Claus FE<auml>rber <CFAERBER@cpan.org>
+
+Previous versions written by Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
+
+=head1 LICENSE
+
+Copyright 2007-2010 Claus FE<auml>rber.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<Unicode::Normalize>, L<Convert::RACE>, L<Convert::DUDE>, http://www.i-d-n.net/draft/draft-ietf-idn-nameprep-03.txt
+L<Unicode::Stringprep>, S<RFC 3491> (L<http://www.ietf.org/rfc/rfc3491.txt>)
 
 =cut
