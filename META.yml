@@ -1,26 +1,26 @@
 ---
-name: Net-IDN-Nameprep
-version: 1.000
+abstract: 'A Stringprep Profile for Internationalized Domain Names (RFC 3491)'
 author:
   - 'Claus Färber <CFAERBER@cpan.org>'
-abstract: A Stringprep Profile for Internationalized Domain Names (RFC 3491)
-license: perl
-resources:
-  license: http://dev.perl.org/licenses/
 build_requires:
   Test::More: 0
   Test::NoWarnings: 0
-requires:
-  Unicode::Stringprep: 1
 configure_requires:
-  Module::Build: 0.35
-provides:
-  Net::IDN::Nameprep:
-    file: lib/Net/IDN/Nameprep.pm
-    version: 1.000
-no_index:
-  directory: eg
-generated_by: Module::Build version 0.35
+  Module::Build: 0.36
+generated_by: 'Module::Build version 0.3603'
+license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
+name: Net-IDN-Nameprep
+no_index:
+  directory: eg
+provides:
+  Net::IDN::Nameprep:
+    file: lib/Net/IDN/Nameprep.pm
+    version: 1.100
+requires:
+  Unicode::Stringprep: 1.1
+resources:
+  license: http://dev.perl.org/licenses/
+version: 1.100

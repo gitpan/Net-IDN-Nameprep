@@ -1,5 +1,9 @@
 Revision history for Perl extension Net::IDN::Nameprep
 
+1.100 (2010-05-31)
+	- support for stored strings (new AllowUnassigned parameter)
+	  patch by Loïc Etienne
+
 1.000 (2009-01-20)
 	- split ::Nameprep into separate module (again):
 	  IDNAbis will not use Nameprep, so it's better to keep
