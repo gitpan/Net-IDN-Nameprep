@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.61.
+signed via the Module::Signature module, version 0.66.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,20 +14,21 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 81a199925c7d9a7bd4c3b43c5191cb1b17fa0bb2 Build.PL
-SHA1 1fc37e89b22ba70cf7783f4663ce3f424c57035f Changes
-SHA1 9b37c74ac55bf4a1d347a873f9936ca24cab4f3b LICENSE
-SHA1 79cf971966eeaf91b8c559b20fa37b5e2126a42d MANIFEST
-SHA1 a35565aa008babcb32287bd63ed6b8a19f542c36 META.yml
-SHA1 4e68f497b94cc56d6c83279004943fdfe0079b21 Makefile.PL
+SHA1 8f8f9f24aea7ecedda63fdd995a581b9195687c1 Build.PL
+SHA1 b110619ec9d5fc037737f8880bfc58257ffa7aa5 Changes
+SHA1 db6132facac62a3a2dcc70d64533ba437679c966 LICENSE
+SHA1 02ad6e80ad8159a7f17c74f5d4f30e04d587f7c6 MANIFEST
+SHA1 547b178d65a37675824dbb30e0aeec41ef177c92 META.json
+SHA1 8c0726c493f24d5143c1ba01f161d6837dad46a9 META.yml
+SHA1 92df53166509376a20a6ed2193c3a88db918f453 Makefile.PL
 SHA1 a87566f0c784efc2cc1ef70d5999ec0576fbc13b README
-SHA1 769d64ea58760da3289bebb2118360600bbfcb11 lib/Net/IDN/Nameprep.pm
+SHA1 bed449f53fdc44ef6c6183a856919415dea8d6f5 lib/Net/IDN/Nameprep.pm
 SHA1 d2abc42c82f13fb54a186b17f9d3cc2e11b78b6d t/00use.t
 SHA1 b0f67b92afa9b0b553d84924e5d2f97f41c2b5c9 t/nameprep_vec.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (Darwin)
+Version: GnuPG v1.4.11 (Darwin)
 
-iEYEARECAAYFAkwDqqkACgkQSKUOY2OWgPCH5QCfWk0bcGqd3BFZla9h0ASoHX1o
-IK4AoMKS8VCWJ0Csldn4tQkL7FKJggoE
-=2gQD
+iEYEARECAAYFAk7hJzMACgkQSKUOY2OWgPABOACfbeU53DFDE4YWWjx4eITwwrkV
+Qv4AoMRIgKFUdE4bUxVyaM+dItXcYJJn
+=qKde
 -----END PGP SIGNATURE-----
